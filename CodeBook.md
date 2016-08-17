@@ -25,7 +25,7 @@
 	DITEN - Università degli Studi di Genova.
 	Via Opera Pia 11A, I-16145, Genoa, Italy.
 	activityrecognition@smartlab.ws
-	www.smartlab.ws
+   [LinkToSmartLab](www.smartlab.ws)
 
 
 	The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. 
@@ -46,4 +46,4 @@
 
 ### A full description is available at the site below about where the input data set used in this project was obtained:
 
-    http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
+  [LinkToInformationAboutInputDataSet](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
