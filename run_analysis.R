@@ -1,10 +1,9 @@
-library(dplyr)
 library(reshape2)
 
 run_analysis<-function()
 {
 
-    dataFolder<-"./data/UCI HAR Dataset"
+    dataFolder<-"./UCI HAR Dataset"
     
     # Download and unzip the dataset:
     if (!file.exists(dataFolder)){
@@ -15,14 +14,20 @@ run_analysis<-function()
     }  
 
     #read test data files. Note we need not use the files in the Inertial Signals folder.
-    featureTest<-read.table("./data/UCI HAR Dataset/test/X_test.txt")
-    activityTest<-as.data.frame(fread("./data/UCI HAR Dataset/test/y_test.txt",col.names = c("activity")))
-    subjectTest<-as.data.frame(fread("./data/UCI HAR Dataset/test/subject_test.txt",col.names = c("subject")))
+    featureTest<-read.table("./UCI HAR Dataset/test/X_test.txt")
+    activityTest<-read.table("./UCI HAR Dataset/test/y_test.txt")
+    subjectTest<-read.table("./UCI HAR Dataset/test/subject_test.txt")
+    
+    names(activityTest)<-c("activity")
+    names(subjectTest)<-c("subject")
     
     #read train data files. Note we need not use the files in the Inertial Signals folder.
-    featureTrain<-read.table("./data/UCI HAR Dataset/train/X_train.txt")
-    activityTrain<-as.data.frame(fread("./data/UCI HAR Dataset/train/y_train.txt",col.names = c("activity")))
-    subjectTrain<-as.data.frame(fread("./data/UCI HAR Dataset/train/subject_train.txt",col.names = c("subject")))
+    featureTrain<-read.table("./UCI HAR Dataset/train/X_train.txt")
+    activityTrain<-read.table("./UCI HAR Dataset/train/y_train.txt")
+    subjectTrain<-read.table("./UCI HAR Dataset/train/subject_train.txt")
+    
+    names(activityTrain)<-c("activity")
+    names(subjectTrain)<-c("subject")
     
     #rowbind respective files of test and train
     featureData<-rbind(featureTest,featureTrain)
@@ -30,7 +35,7 @@ run_analysis<-function()
     subjectData<-rbind(subjectTest,subjectTrain)
 
     #read feature file    
-    featureLabels <- read.table("./data/UCI HAR Dataset/features.txt")
+    featureLabels <- read.table("./UCI HAR Dataset/features.txt")
     meanAndStdIndexes<-grep("(.*)(mean\\(\\)|std\\(\\))(.*)",featureLabels[,2])
     
     #extract Mean and Standard deviation columns 
@@ -42,7 +47,7 @@ run_analysis<-function()
     names(featureDataMeanAndStd)<-tolower(gsub("^f","frequency",gsub("^t","time",gsub("\\(\\)","",meanAndStdLabels))))
 
     #read activity label file
-    activityLabelsData <- read.table("./data/UCI HAR Dataset/activity_labels.txt")
+    activityLabelsData <- read.table("./UCI HAR Dataset/activity_labels.txt")
 
     #update the activityData codes with respective activity Data labels
     for(i in 1:nrow(activityData)){
@@ -64,5 +69,7 @@ run_analysis<-function()
     
     #write the reshaped data to file tidy_data_set.txt
     write.table(subjectActivityFeatureDataReshaped, "tidy_data_set.txt", row.names = FALSE, quote = FALSE)
-    
 }
+
+#To run the code 
+#At the promt call the funtion run_analysis()
