@@ -72,4 +72,4 @@ run_analysis<-function()
 }
 
 #To run the code 
-#At the promt call the funtion run_analysis()
+#At the prompt call the function run_analysis()
